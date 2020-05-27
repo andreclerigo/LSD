@@ -1,0 +1,93 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/AndreClerigo/Desktop/Git/LSD/Projeto/Fase1/simulation/modelsim
+Ealu8
+Z1 w1590504431
+Z2 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+Z3 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z4 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+R0
+Z5 8C:/Users/AndreClerigo/Desktop/Git/LSD/Projeto/Fase1/ALU8.vhd
+Z6 FC:/Users/AndreClerigo/Desktop/Git/LSD/Projeto/Fase1/ALU8.vhd
+l0
+L5
+Vam4^NVPW8d:BVa6g2>:>h3
+!s100 Z_zba1l?8V9Ta^O@WJ]`40
+Z7 OV;C;10.5b;63
+31
+Z8 !s110 1590509433
+!i10b 1
+Z9 !s108 1590509433.000000
+Z10 !s90 -reportprogress|300|-93|-work|work|C:/Users/AndreClerigo/Desktop/Git/LSD/Projeto/Fase1/ALU8.vhd|
+Z11 !s107 C:/Users/AndreClerigo/Desktop/Git/LSD/Projeto/Fase1/ALU8.vhd|
+!i113 1
+Z12 o-93 -work work
+Z13 tExplicit 1 CvgOpt 0
+Abehavioral
+R2
+R3
+R4
+Z14 DEx4 work 4 alu8 0 22 am4^NVPW8d:BVa6g2>:>h3
+l20
+L13
+VleK7HY`F5gO]`jcaGijaV0
+!s100 3Oa6dDXG>18>9<FQU]jhO3
+R7
+31
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Ealu8_tb
+Z15 w1590509288
+R2
+R3
+R4
+R0
+Z16 8C:/Users/AndreClerigo/Desktop/Git/LSD/Projeto/Fase1/ALU8_Tb.vhd
+Z17 FC:/Users/AndreClerigo/Desktop/Git/LSD/Projeto/Fase1/ALU8_Tb.vhd
+l0
+L5
+V>TEM;zQAm1nGe=OkLPYXj0
+!s100 OJY`KSiK?7ARhe6<?dWL31
+R7
+32
+Z18 !s110 1590509455
+!i10b 1
+Z19 !s108 1590509455.000000
+Z20 !s90 -reportprogress|300|-work|work|C:/Users/AndreClerigo/Desktop/Git/LSD/Projeto/Fase1/ALU8_Tb.vhd|
+Z21 !s107 C:/Users/AndreClerigo/Desktop/Git/LSD/Projeto/Fase1/ALU8_Tb.vhd|
+!i113 1
+Z22 o-work work
+R13
+Astimulus
+R14
+R2
+R3
+R4
+DEx4 work 7 alu8_tb 0 22 >TEM;zQAm1nGe=OkLPYXj0
+l11
+L8
+V2Jm_9fQgZ]RDJ0z0[6WYk2
+!s100 ]o0gYIZAMRLnAMYMzfie<0
+R7
+32
+R18
+!i10b 1
+R19
+R20
+R21
+!i113 1
+R22
+R13
