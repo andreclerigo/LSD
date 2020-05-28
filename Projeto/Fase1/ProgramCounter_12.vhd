@@ -7,20 +7,20 @@ entity ProgramCounter_12 is
 	port(clk     : in  std_logic;
 		  Reset   : in  std_logic;
 		  Enable  : in  std_logic;
-		  Cnt     : out std_logic_vector(N-1 downto 0));
+		  Cnt     : out std_logic_vector(N-1 downto 0)); -- 4bits para contar até 16 mas apenas precisamos de contar 12 instrucoes
 end ProgramCounter_12;
 
 architecture Behavioral of ProgramCounter_12 is
-	signal s_cnt : unsigned(3 downto 0);
+	signal s_count : unsigned(N-1 downto 0) ;
 begin
-	process(clk, reset)
+	process(clk, Reset, Enable)
 	begin
-		if (Reset <= '1') then
+		if (Reset = '1') then                  -- Reset assincrono
 			s_count <= (others => '0');
 		elsif (rising_edge(clk)) then
-			if (Enable <= '1') then
-				if (s_count = 11) then
-					s_count <= 0;
+			if (Enable = '1') then
+				if (s_count = "01011") then      -- Quando chega a 11 volta a 0
+					s_count <= (others => '0');
 				else
 					s_count <= s_count + 1;
 				end if;

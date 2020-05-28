@@ -433,11 +433,6 @@ refer to the applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 728 192)
-	(pt 784 192)
-	(bus)
-)
-(connector
 	(pt 488 384)
 	(pt 536 384)
 	(bus)
@@ -448,13 +443,23 @@ refer to the applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 760 184)
+	(pt 760 264)
+	(pt 760 192)
+	(bus)
+)
+(connector
+	(pt 792 264)
 	(pt 760 264)
 	(bus)
 )
 (connector
-	(pt 760 264)
-	(pt 792 264)
+	(pt 728 192)
+	(pt 760 192)
+	(bus)
+)
+(connector
+	(pt 760 192)
+	(pt 784 192)
 	(bus)
 )
 (junction (pt 496 208))
@@ -463,3 +468,4 @@ refer to the applicable agreement for further details.
 (junction (pt 520 256))
 (junction (pt 536 272))
 (junction (pt 536 384))
+(junction (pt 760 192))

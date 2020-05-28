@@ -8,7 +8,7 @@ architecture Stimulus of SignExtend_7b_to_8b_Tb is
 	signal s_input  : std_logic_vector(6 downto 0);
 	signal s_output : std_logic_vector(7 downto 0);
 begin
-	--Ligar os inputs do Mux2_1_8b aos pins da TestBench
+	--Ligar os inputs do SignExtend_7b_to_8b aos pins da TestBench
 	uut : entity work.SignExtend_7b_to_8b(Behavioral)  
 	port map(input => s_input,
 				output => s_output);

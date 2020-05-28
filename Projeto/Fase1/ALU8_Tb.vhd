@@ -9,6 +9,7 @@ architecture Stimulus of ALU8_tB is
 	signal s_op0, s_op1, s_res : std_logic_vector(7 downto 0);
 	signal s_ALUOp             : std_logic_vector(3 downto 0);
 begin 
+	--Ligar os inputs da ALU9 aos pins da TestBench
 	uut: entity work.ALU8(Behavioral)
 		port map(op0   => s_op0,
 					op1   => s_op1,

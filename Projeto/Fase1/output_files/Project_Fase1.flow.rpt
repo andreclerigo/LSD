@@ -1,5 +1,5 @@
 Flow report for Project_Fase1
-Tue May 26 17:08:20 2020
+Thu May 28 11:23:25 2020
 Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 
 
@@ -40,22 +40,22 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Tue May 26 17:08:20 2020       ;
+; Flow Status                        ; Successful - Thu May 28 11:23:25 2020       ;
 ; Quartus Prime Version              ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
 ; Revision Name                      ; Project_Fase1                               ;
-; Top-level Entity Name              ; ALU8                                        ;
+; Top-level Entity Name              ; Project_Fase1                               ;
 ; Family                             ; Cyclone IV E                                ;
 ; Device                             ; EP4CE115F29C7                               ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 169                                         ;
-;     Total combinational functions  ; 169                                         ;
-;     Dedicated logic registers      ; 0                                           ;
-; Total registers                    ; 0                                           ;
-; Total pins                         ; 28                                          ;
+; Total logic elements               ; 7 / 114,480 ( < 1 % )                       ;
+;     Total combinational functions  ; 7 / 114,480 ( < 1 % )                       ;
+;     Dedicated logic registers      ; 7 / 114,480 ( < 1 % )                       ;
+; Total registers                    ; 7                                           ;
+; Total pins                         ; 16 / 529 ( 3 % )                            ;
 ; Total virtual pins                 ; 0                                           ;
-; Total memory bits                  ; 0                                           ;
-; Embedded Multiplier 9-bit elements ; 2                                           ;
-; Total PLLs                         ; 0                                           ;
+; Total memory bits                  ; 0 / 3,981,312 ( 0 % )                       ;
+; Embedded Multiplier 9-bit elements ; 0 / 532 ( 0 % )                             ;
+; Total PLLs                         ; 0 / 4 ( 0 % )                               ;
 +------------------------------------+---------------------------------------------+
 
 
@@ -64,7 +64,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 05/26/2020 17:08:10 ;
+; Start date & time ; 05/28/2020 11:22:46 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Project_Fase1       ;
 +-------------------+---------------------+
@@ -75,44 +75,57 @@ refer to the applicable agreement for further details.
 +-------------------------------------+----------------------------------------+---------------+-------------+----------------+
 ; Assignment Name                     ; Value                                  ; Default Value ; Entity Name ; Section Id     ;
 +-------------------------------------+----------------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID               ; 5334173611941.159050928904580          ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID               ; 5334173611941.159066136607452          ; --            ; --          ; --             ;
 ; EDA_OUTPUT_DATA_FORMAT              ; Vhdl                                   ; --            ; --          ; eda_simulation ;
 ; EDA_SIMULATION_TOOL                 ; ModelSim-Altera (VHDL)                 ; <None>        ; --          ; --             ;
 ; EDA_TIME_SCALE                      ; 1 ps                                   ; --            ; --          ; eda_simulation ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --            ; --          ; --             ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --            ; --          ; --             ;
 ; NOMINAL_CORE_SUPPLY_VOLTAGE         ; 1.2V                                   ; --            ; --          ; --             ;
-; PARTITION_COLOR                     ; -- (Not supported for targeted family) ; --            ; ALU8        ; Top            ;
-; PARTITION_FITTER_PRESERVATION_LEVEL ; -- (Not supported for targeted family) ; --            ; ALU8        ; Top            ;
-; PARTITION_NETLIST_TYPE              ; -- (Not supported for targeted family) ; --            ; ALU8        ; Top            ;
+; PARTITION_COLOR                     ; -- (Not supported for targeted family) ; --            ; --          ; Top            ;
+; PARTITION_FITTER_PRESERVATION_LEVEL ; -- (Not supported for targeted family) ; --            ; --          ; Top            ;
+; PARTITION_NETLIST_TYPE              ; -- (Not supported for targeted family) ; --            ; --          ; Top            ;
+; POWER_BOARD_THERMAL_MODEL           ; None (CONSERVATIVE)                    ; --            ; --          ; --             ;
+; POWER_PRESET_COOLING_SOLUTION       ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW  ; --            ; --          ; --             ;
 ; PROJECT_OUTPUT_DIRECTORY            ; output_files                           ; --            ; --          ; --             ;
-; TOP_LEVEL_ENTITY                    ; ALU8                                   ; Project_Fase1 ; --          ; --             ;
 +-------------------------------------+----------------------------------------+---------------+-------------+----------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------+
-; Flow Elapsed Time                                                                                                        ;
-+----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
-+----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:11     ; 1.0                     ; 4808 MB             ; 00:00:23                           ;
-; Total                ; 00:00:11     ; --                      ; --                  ; 00:00:23                           ;
-+----------------------+--------------+-------------------------+---------------------+------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------+
+; Flow Elapsed Time                                                                                                             ;
++---------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
++---------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Analysis & Synthesis      ; 00:00:11     ; 1.0                     ; 4849 MB             ; 00:00:24                           ;
+; Fitter                    ; 00:00:18     ; 1.0                     ; 6295 MB             ; 00:00:27                           ;
+; Assembler                 ; 00:00:04     ; 1.0                     ; 4684 MB             ; 00:00:03                           ;
+; TimeQuest Timing Analyzer ; 00:00:02     ; 1.0                     ; 4908 MB             ; 00:00:02                           ;
+; EDA Netlist Writer        ; 00:00:01     ; 1.0                     ; 4654 MB             ; 00:00:01                           ;
+; Total                     ; 00:00:36     ; --                      ; --                  ; 00:00:57                           ;
++---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
-+------------------------------------------------------------------------------------+
-; Flow OS Summary                                                                    ;
-+----------------------+------------------+------------+------------+----------------+
-; Module Name          ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
-+----------------------+------------------+------------+------------+----------------+
-; Analysis & Synthesis ; AndreClerigo     ; Windows 10 ; 10.0       ; x86_64         ;
-+----------------------+------------------+------------+------------+----------------+
++-----------------------------------------------------------------------------------------+
+; Flow OS Summary                                                                         ;
++---------------------------+------------------+------------+------------+----------------+
+; Module Name               ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
++---------------------------+------------------+------------+------------+----------------+
+; Analysis & Synthesis      ; AndreClerigo     ; Windows 10 ; 10.0       ; x86_64         ;
+; Fitter                    ; AndreClerigo     ; Windows 10 ; 10.0       ; x86_64         ;
+; Assembler                 ; AndreClerigo     ; Windows 10 ; 10.0       ; x86_64         ;
+; TimeQuest Timing Analyzer ; AndreClerigo     ; Windows 10 ; 10.0       ; x86_64         ;
+; EDA Netlist Writer        ; AndreClerigo     ; Windows 10 ; 10.0       ; x86_64         ;
++---------------------------+------------------+------------+------------+----------------+
 
 
 ------------
 ; Flow Log ;
 ------------
 quartus_map --read_settings_files=on --write_settings_files=off Project_Fase1 -c Project_Fase1
+quartus_fit --read_settings_files=off --write_settings_files=off Project_Fase1 -c Project_Fase1
+quartus_asm --read_settings_files=off --write_settings_files=off Project_Fase1 -c Project_Fase1
+quartus_sta Project_Fase1 -c Project_Fase1
+quartus_eda --read_settings_files=off --write_settings_files=off Project_Fase1 -c Project_Fase1
 
 
 

@@ -11,7 +11,7 @@ architecture Stimulus of Mux2_1_8b_Tb is
 	signal s_output : std_logic_vector(7 downto 0);
 begin
 	--Ligar os inputs do Mux2_1_8b aos pins da TestBench
-	uut: entity work.Mux2_1_8b(Behavioral)
+	mux: entity work.Mux2_1_8b(Behavioral)
 		port map(input0 => s_input0,
 					input1 => s_input1,
 					sel    => s_sel,

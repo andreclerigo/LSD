@@ -10,5 +10,12 @@ end SignExtend_7b_to_8b;
 
 architecture Behavioral of SignExtend_7b_to_8b is
 begin
-	output <= '0' & input; --Transforma um input de 7bits input num output de 8bits
+	process(input)
+	begin
+		if(input(6) = '1') then
+			output <= '1' & input; --Transforma um input de 7bits input num output de 8bits
+		else
+			output <= '0' & input; --Transforma um input de 7bits input num output de 8bits
+		end if;
+	end process;
 end Behavioral;
