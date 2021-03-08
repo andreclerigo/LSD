@@ -16,7 +16,7 @@
 -- PROGRAM "Quartus Prime"
 -- VERSION "Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition"
 
--- DATE "05/28/2020 11:23:25"
+-- DATE "05/30/2020 03:01:54"
 
 -- 
 -- Device: Altera EP4CE115F29C7 Package FBGA780
@@ -88,27 +88,32 @@ ENTITY 	Project_Fase1 IS
 	MemWr : IN std_logic;
 	MemToReg : IN std_logic;
 	ALUOp : IN std_logic_vector(3 DOWNTO 0);
-	LIXO : OUT std_logic_vector(2 DOWNTO 0)
+	Opcode : OUT std_logic_vector(2 DOWNTO 0);
+	func : OUT std_logic_vector(3 DOWNTO 0)
 	);
 END Project_Fase1;
 
 -- Design Ports Information
--- RegDst	=>  Location: PIN_W22,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- RegWr	=>  Location: PIN_C23,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- ALUSrc	=>  Location: PIN_V7,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- MemWr	=>  Location: PIN_E28,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- MemToReg	=>  Location: PIN_D22,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- ALUOp[0]	=>  Location: PIN_K27,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- ALUOp[1]	=>  Location: PIN_R3,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- ALUOp[2]	=>  Location: PIN_AC14,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- ALUOp[3]	=>  Location: PIN_R24,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- LIXO[0]	=>  Location: PIN_G13,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- LIXO[1]	=>  Location: PIN_A10,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- LIXO[2]	=>  Location: PIN_B10,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- RegDst	=>  Location: PIN_AH25,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- RegWr	=>  Location: PIN_F12,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- ALUSrc	=>  Location: PIN_G10,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- MemWr	=>  Location: PIN_AG12,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- MemToReg	=>  Location: PIN_G17,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- ALUOp[0]	=>  Location: PIN_AG22,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- ALUOp[1]	=>  Location: PIN_B23,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- ALUOp[2]	=>  Location: PIN_AB8,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- ALUOp[3]	=>  Location: PIN_AE21,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- Opcode[0]	=>  Location: PIN_R3,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- Opcode[1]	=>  Location: PIN_U3,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- Opcode[2]	=>  Location: PIN_R5,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- func[0]	=>  Location: PIN_T4,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- func[1]	=>  Location: PIN_T3,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- func[2]	=>  Location: PIN_R6,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- func[3]	=>  Location: PIN_B10,	 I/O Standard: 2.5 V,	 Current Strength: Default
 -- CLK	=>  Location: PIN_J1,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- RI	=>  Location: PIN_J12,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- RI	=>  Location: PIN_U4,	 I/O Standard: 2.5 V,	 Current Strength: Default
 -- Reset	=>  Location: PIN_Y2,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- EnPC	=>  Location: PIN_H13,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- EnPC	=>  Location: PIN_R4,	 I/O Standard: 2.5 V,	 Current Strength: Default
 
 
 ARCHITECTURE structure OF Project_Fase1 IS
@@ -131,7 +136,8 @@ SIGNAL ww_ALUSrc : std_logic;
 SIGNAL ww_MemWr : std_logic;
 SIGNAL ww_MemToReg : std_logic;
 SIGNAL ww_ALUOp : std_logic_vector(3 DOWNTO 0);
-SIGNAL ww_LIXO : std_logic_vector(2 DOWNTO 0);
+SIGNAL ww_Opcode : std_logic_vector(2 DOWNTO 0);
+SIGNAL ww_func : std_logic_vector(3 DOWNTO 0);
 SIGNAL \Reset~inputclkctrl_INCLK_bus\ : std_logic_vector(3 DOWNTO 0);
 SIGNAL \CLK~inputclkctrl_INCLK_bus\ : std_logic_vector(3 DOWNTO 0);
 SIGNAL \RegDst~input_o\ : std_logic;
@@ -143,9 +149,13 @@ SIGNAL \ALUOp[0]~input_o\ : std_logic;
 SIGNAL \ALUOp[1]~input_o\ : std_logic;
 SIGNAL \ALUOp[2]~input_o\ : std_logic;
 SIGNAL \ALUOp[3]~input_o\ : std_logic;
-SIGNAL \LIXO[0]~output_o\ : std_logic;
-SIGNAL \LIXO[1]~output_o\ : std_logic;
-SIGNAL \LIXO[2]~output_o\ : std_logic;
+SIGNAL \Opcode[0]~output_o\ : std_logic;
+SIGNAL \Opcode[1]~output_o\ : std_logic;
+SIGNAL \Opcode[2]~output_o\ : std_logic;
+SIGNAL \func[0]~output_o\ : std_logic;
+SIGNAL \func[1]~output_o\ : std_logic;
+SIGNAL \func[2]~output_o\ : std_logic;
+SIGNAL \func[3]~output_o\ : std_logic;
 SIGNAL \CLK~input_o\ : std_logic;
 SIGNAL \CLK~inputclkctrl_outclk\ : std_logic;
 SIGNAL \programcounter_12|s_count[0]~3_combout\ : std_logic;
@@ -159,6 +169,9 @@ SIGNAL \imemory|Mux2~0_combout\ : std_logic;
 SIGNAL \RI~input_o\ : std_logic;
 SIGNAL \imemory|Mux1~0_combout\ : std_logic;
 SIGNAL \imemory|Mux0~0_combout\ : std_logic;
+SIGNAL \imemory|Mux11~0_combout\ : std_logic;
+SIGNAL \imemory|Mux10~0_combout\ : std_logic;
+SIGNAL \imemory|Mux5~0_combout\ : std_logic;
 SIGNAL \imemory|readData\ : std_logic_vector(15 DOWNTO 0);
 SIGNAL \programcounter_12|s_count\ : std_logic_vector(3 DOWNTO 0);
 SIGNAL \ALT_INV_Reset~inputclkctrl_outclk\ : std_logic;
@@ -182,7 +195,8 @@ ww_ALUSrc <= ALUSrc;
 ww_MemWr <= MemWr;
 ww_MemToReg <= MemToReg;
 ww_ALUOp <= ALUOp;
-LIXO <= ww_LIXO;
+Opcode <= ww_Opcode;
+func <= ww_func;
 ww_devoe <= devoe;
 ww_devclrn <= devclrn;
 ww_devpor <= devpor;
@@ -197,8 +211,8 @@ PORT MAP (
 	devclrn => ww_devclrn,
 	devpor => ww_devpor);
 
--- Location: IOOBUF_X38_Y73_N16
-\LIXO[0]~output\ : cycloneive_io_obuf
+-- Location: IOOBUF_X0_Y34_N23
+\Opcode[0]~output\ : cycloneive_io_obuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
@@ -207,10 +221,10 @@ GENERIC MAP (
 PORT MAP (
 	i => \imemory|readData\(13),
 	devoe => ww_devoe,
-	o => \LIXO[0]~output_o\);
+	o => \Opcode[0]~output_o\);
 
--- Location: IOOBUF_X38_Y73_N2
-\LIXO[1]~output\ : cycloneive_io_obuf
+-- Location: IOOBUF_X0_Y34_N9
+\Opcode[1]~output\ : cycloneive_io_obuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
@@ -219,10 +233,10 @@ GENERIC MAP (
 PORT MAP (
 	i => \imemory|readData\(14),
 	devoe => ww_devoe,
-	o => \LIXO[1]~output_o\);
+	o => \Opcode[1]~output_o\);
 
--- Location: IOOBUF_X38_Y73_N9
-\LIXO[2]~output\ : cycloneive_io_obuf
+-- Location: IOOBUF_X0_Y32_N23
+\Opcode[2]~output\ : cycloneive_io_obuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
@@ -231,7 +245,55 @@ GENERIC MAP (
 PORT MAP (
 	i => \imemory|readData\(15),
 	devoe => ww_devoe,
-	o => \LIXO[2]~output_o\);
+	o => \Opcode[2]~output_o\);
+
+-- Location: IOOBUF_X0_Y33_N23
+\func[0]~output\ : cycloneive_io_obuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	open_drain_output => "false")
+-- pragma translate_on
+PORT MAP (
+	i => \imemory|readData\(0),
+	devoe => ww_devoe,
+	o => \func[0]~output_o\);
+
+-- Location: IOOBUF_X0_Y32_N16
+\func[1]~output\ : cycloneive_io_obuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	open_drain_output => "false")
+-- pragma translate_on
+PORT MAP (
+	i => \imemory|readData\(1),
+	devoe => ww_devoe,
+	o => \func[1]~output_o\);
+
+-- Location: IOOBUF_X0_Y34_N2
+\func[2]~output\ : cycloneive_io_obuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	open_drain_output => "false")
+-- pragma translate_on
+PORT MAP (
+	i => \imemory|readData\(2),
+	devoe => ww_devoe,
+	o => \func[2]~output_o\);
+
+-- Location: IOOBUF_X38_Y73_N9
+\func[3]~output\ : cycloneive_io_obuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	open_drain_output => "false")
+-- pragma translate_on
+PORT MAP (
+	i => GND,
+	devoe => ww_devoe,
+	o => \func[3]~output_o\);
 
 -- Location: IOIBUF_X0_Y36_N8
 \CLK~input\ : cycloneive_io_ibuf
@@ -257,7 +319,7 @@ PORT MAP (
 	devpor => ww_devpor,
 	outclk => \CLK~inputclkctrl_outclk\);
 
--- Location: LCCOMB_X39_Y72_N18
+-- Location: LCCOMB_X1_Y33_N8
 \programcounter_12|s_count[0]~3\ : cycloneive_lcell_comb
 -- Equation(s):
 -- \programcounter_12|s_count[0]~3_combout\ = !\programcounter_12|s_count\(0)
@@ -295,7 +357,7 @@ PORT MAP (
 	devpor => ww_devpor,
 	outclk => \Reset~inputclkctrl_outclk\);
 
--- Location: IOIBUF_X38_Y73_N22
+-- Location: IOIBUF_X0_Y33_N15
 \EnPC~input\ : cycloneive_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
@@ -306,7 +368,7 @@ PORT MAP (
 	i => ww_EnPC,
 	o => \EnPC~input_o\);
 
--- Location: FF_X39_Y72_N19
+-- Location: FF_X1_Y33_N9
 \programcounter_12|s_count[0]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
@@ -322,7 +384,7 @@ PORT MAP (
 	devpor => ww_devpor,
 	q => \programcounter_12|s_count\(0));
 
--- Location: LCCOMB_X38_Y72_N24
+-- Location: LCCOMB_X2_Y33_N24
 \programcounter_12|s_count[1]~0\ : cycloneive_lcell_comb
 -- Equation(s):
 -- \programcounter_12|s_count[1]~0_combout\ = \programcounter_12|s_count\(1) $ (((\EnPC~input_o\ & \programcounter_12|s_count\(0))))
@@ -338,7 +400,7 @@ PORT MAP (
 	datad => \programcounter_12|s_count\(0),
 	combout => \programcounter_12|s_count[1]~0_combout\);
 
--- Location: FF_X38_Y72_N25
+-- Location: FF_X2_Y33_N25
 \programcounter_12|s_count[1]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
@@ -353,7 +415,7 @@ PORT MAP (
 	devpor => ww_devpor,
 	q => \programcounter_12|s_count\(1));
 
--- Location: LCCOMB_X39_Y72_N30
+-- Location: LCCOMB_X1_Y33_N24
 \programcounter_12|s_count~2\ : cycloneive_lcell_comb
 -- Equation(s):
 -- \programcounter_12|s_count~2_combout\ = (\programcounter_12|s_count\(0) & ((\programcounter_12|s_count\(3) & ((!\programcounter_12|s_count\(1)))) # (!\programcounter_12|s_count\(3) & (\programcounter_12|s_count\(2) & \programcounter_12|s_count\(1))))) # 
@@ -371,7 +433,7 @@ PORT MAP (
 	datad => \programcounter_12|s_count\(1),
 	combout => \programcounter_12|s_count~2_combout\);
 
--- Location: FF_X39_Y72_N31
+-- Location: FF_X1_Y33_N25
 \programcounter_12|s_count[3]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
@@ -387,7 +449,7 @@ PORT MAP (
 	devpor => ww_devpor,
 	q => \programcounter_12|s_count\(3));
 
--- Location: LCCOMB_X39_Y72_N0
+-- Location: LCCOMB_X1_Y33_N10
 \programcounter_12|s_count~1\ : cycloneive_lcell_comb
 -- Equation(s):
 -- \programcounter_12|s_count~1_combout\ = (\programcounter_12|s_count\(0) & ((\programcounter_12|s_count\(2) & ((!\programcounter_12|s_count\(1)))) # (!\programcounter_12|s_count\(2) & (!\programcounter_12|s_count\(3) & \programcounter_12|s_count\(1))))) # 
@@ -405,7 +467,7 @@ PORT MAP (
 	datad => \programcounter_12|s_count\(1),
 	combout => \programcounter_12|s_count~1_combout\);
 
--- Location: FF_X39_Y72_N1
+-- Location: FF_X1_Y33_N11
 \programcounter_12|s_count[2]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
@@ -421,25 +483,25 @@ PORT MAP (
 	devpor => ww_devpor,
 	q => \programcounter_12|s_count\(2));
 
--- Location: LCCOMB_X39_Y72_N24
+-- Location: LCCOMB_X1_Y33_N12
 \imemory|Mux2~0\ : cycloneive_lcell_comb
 -- Equation(s):
--- \imemory|Mux2~0_combout\ = (\programcounter_12|s_count\(1) & (!\programcounter_12|s_count\(3) & ((!\programcounter_12|s_count\(2)) # (!\programcounter_12|s_count\(0))))) # (!\programcounter_12|s_count\(1) & (\programcounter_12|s_count\(2) $ 
+-- \imemory|Mux2~0_combout\ = (\programcounter_12|s_count\(1) & (!\programcounter_12|s_count\(3) & ((!\programcounter_12|s_count\(0)) # (!\programcounter_12|s_count\(2))))) # (!\programcounter_12|s_count\(1) & (\programcounter_12|s_count\(2) $ 
 -- (((\programcounter_12|s_count\(3)) # (!\programcounter_12|s_count\(0))))))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0000011100111001",
+	lut_mask => "0001001101100101",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \programcounter_12|s_count\(0),
-	datab => \programcounter_12|s_count\(2),
-	datac => \programcounter_12|s_count\(3),
+	dataa => \programcounter_12|s_count\(2),
+	datab => \programcounter_12|s_count\(3),
+	datac => \programcounter_12|s_count\(0),
 	datad => \programcounter_12|s_count\(1),
 	combout => \imemory|Mux2~0_combout\);
 
--- Location: IOIBUF_X40_Y73_N8
+-- Location: IOIBUF_X0_Y34_N15
 \RI~input\ : cycloneive_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
@@ -450,7 +512,7 @@ PORT MAP (
 	i => ww_RI,
 	o => \RI~input_o\);
 
--- Location: FF_X39_Y72_N25
+-- Location: FF_X1_Y33_N13
 \imemory|readData[13]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
@@ -465,24 +527,24 @@ PORT MAP (
 	devpor => ww_devpor,
 	q => \imemory|readData\(13));
 
--- Location: LCCOMB_X39_Y72_N26
+-- Location: LCCOMB_X1_Y33_N22
 \imemory|Mux1~0\ : cycloneive_lcell_comb
 -- Equation(s):
 -- \imemory|Mux1~0_combout\ = (!\programcounter_12|s_count\(2) & ((\programcounter_12|s_count\(3) & ((\programcounter_12|s_count\(1)))) # (!\programcounter_12|s_count\(3) & (!\programcounter_12|s_count\(0) & !\programcounter_12|s_count\(1)))))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0011000000000001",
+	lut_mask => "0100010000000001",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \programcounter_12|s_count\(0),
-	datab => \programcounter_12|s_count\(2),
-	datac => \programcounter_12|s_count\(3),
+	dataa => \programcounter_12|s_count\(2),
+	datab => \programcounter_12|s_count\(3),
+	datac => \programcounter_12|s_count\(0),
 	datad => \programcounter_12|s_count\(1),
 	combout => \imemory|Mux1~0_combout\);
 
--- Location: FF_X39_Y72_N27
+-- Location: FF_X1_Y33_N23
 \imemory|readData[14]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
@@ -497,25 +559,25 @@ PORT MAP (
 	devpor => ww_devpor,
 	q => \imemory|readData\(14));
 
--- Location: LCCOMB_X39_Y72_N28
+-- Location: LCCOMB_X1_Y33_N20
 \imemory|Mux0~0\ : cycloneive_lcell_comb
 -- Equation(s):
--- \imemory|Mux0~0_combout\ = (\programcounter_12|s_count\(2) & (!\programcounter_12|s_count\(3) & (\programcounter_12|s_count\(0) $ (!\programcounter_12|s_count\(1))))) # (!\programcounter_12|s_count\(2) & ((\programcounter_12|s_count\(3) & 
--- ((\programcounter_12|s_count\(1)))) # (!\programcounter_12|s_count\(3) & (\programcounter_12|s_count\(0) & !\programcounter_12|s_count\(1)))))
+-- \imemory|Mux0~0_combout\ = (\programcounter_12|s_count\(2) & (!\programcounter_12|s_count\(3) & (\programcounter_12|s_count\(0) $ (!\programcounter_12|s_count\(1))))) # (!\programcounter_12|s_count\(2) & (\programcounter_12|s_count\(3) $ 
+-- (((!\programcounter_12|s_count\(1))))))
 
 -- pragma translate_off
 GENERIC MAP (
-	lut_mask => "0011100000000110",
+	lut_mask => "0110010000010011",
 	sum_lutc_input => "datac")
 -- pragma translate_on
 PORT MAP (
-	dataa => \programcounter_12|s_count\(0),
-	datab => \programcounter_12|s_count\(2),
-	datac => \programcounter_12|s_count\(3),
+	dataa => \programcounter_12|s_count\(2),
+	datab => \programcounter_12|s_count\(3),
+	datac => \programcounter_12|s_count\(0),
 	datad => \programcounter_12|s_count\(1),
 	combout => \imemory|Mux0~0_combout\);
 
--- Location: FF_X39_Y72_N29
+-- Location: FF_X1_Y33_N21
 \imemory|readData[15]\ : dffeas
 -- pragma translate_off
 GENERIC MAP (
@@ -530,7 +592,106 @@ PORT MAP (
 	devpor => ww_devpor,
 	q => \imemory|readData\(15));
 
--- Location: IOIBUF_X115_Y30_N1
+-- Location: LCCOMB_X1_Y33_N26
+\imemory|Mux11~0\ : cycloneive_lcell_comb
+-- Equation(s):
+-- \imemory|Mux11~0_combout\ = (\programcounter_12|s_count\(2) & (!\programcounter_12|s_count\(3) & (\programcounter_12|s_count\(0) $ (!\programcounter_12|s_count\(1))))) # (!\programcounter_12|s_count\(2) & (\programcounter_12|s_count\(0) & 
+-- (\programcounter_12|s_count\(3) $ (!\programcounter_12|s_count\(1)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0110000000010010",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \programcounter_12|s_count\(2),
+	datab => \programcounter_12|s_count\(3),
+	datac => \programcounter_12|s_count\(0),
+	datad => \programcounter_12|s_count\(1),
+	combout => \imemory|Mux11~0_combout\);
+
+-- Location: FF_X1_Y33_N27
+\imemory|readData[0]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \CLK~inputclkctrl_outclk\,
+	d => \imemory|Mux11~0_combout\,
+	ena => \RI~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \imemory|readData\(0));
+
+-- Location: LCCOMB_X1_Y33_N28
+\imemory|Mux10~0\ : cycloneive_lcell_comb
+-- Equation(s):
+-- \imemory|Mux10~0_combout\ = (\programcounter_12|s_count\(2) & (!\programcounter_12|s_count\(3) & (\programcounter_12|s_count\(0) & !\programcounter_12|s_count\(1)))) # (!\programcounter_12|s_count\(2) & ((\programcounter_12|s_count\(3) & 
+-- ((\programcounter_12|s_count\(1)) # (!\programcounter_12|s_count\(0)))) # (!\programcounter_12|s_count\(3) & (!\programcounter_12|s_count\(0) & \programcounter_12|s_count\(1)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0100010100100100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \programcounter_12|s_count\(2),
+	datab => \programcounter_12|s_count\(3),
+	datac => \programcounter_12|s_count\(0),
+	datad => \programcounter_12|s_count\(1),
+	combout => \imemory|Mux10~0_combout\);
+
+-- Location: FF_X1_Y33_N29
+\imemory|readData[1]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \CLK~inputclkctrl_outclk\,
+	d => \imemory|Mux10~0_combout\,
+	ena => \RI~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \imemory|readData\(1));
+
+-- Location: LCCOMB_X1_Y33_N30
+\imemory|Mux5~0\ : cycloneive_lcell_comb
+-- Equation(s):
+-- \imemory|Mux5~0_combout\ = (\programcounter_12|s_count\(2) & (!\programcounter_12|s_count\(3) & (\programcounter_12|s_count\(0) & !\programcounter_12|s_count\(1)))) # (!\programcounter_12|s_count\(2) & (!\programcounter_12|s_count\(0) & 
+-- (\programcounter_12|s_count\(3) $ (\programcounter_12|s_count\(1)))))
+
+-- pragma translate_off
+GENERIC MAP (
+	lut_mask => "0000000100100100",
+	sum_lutc_input => "datac")
+-- pragma translate_on
+PORT MAP (
+	dataa => \programcounter_12|s_count\(2),
+	datab => \programcounter_12|s_count\(3),
+	datac => \programcounter_12|s_count\(0),
+	datad => \programcounter_12|s_count\(1),
+	combout => \imemory|Mux5~0_combout\);
+
+-- Location: FF_X1_Y33_N31
+\imemory|readData[2]\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \CLK~inputclkctrl_outclk\,
+	d => \imemory|Mux5~0_combout\,
+	ena => \RI~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \imemory|readData\(2));
+
+-- Location: IOIBUF_X91_Y0_N15
 \RegDst~input\ : cycloneive_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
@@ -541,7 +702,7 @@ PORT MAP (
 	i => ww_RegDst,
 	o => \RegDst~input_o\);
 
--- Location: IOIBUF_X100_Y73_N22
+-- Location: IOIBUF_X33_Y73_N8
 \RegWr~input\ : cycloneive_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
@@ -552,7 +713,7 @@ PORT MAP (
 	i => ww_RegWr,
 	o => \RegWr~input_o\);
 
--- Location: IOIBUF_X0_Y14_N1
+-- Location: IOIBUF_X20_Y73_N8
 \ALUSrc~input\ : cycloneive_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
@@ -563,7 +724,7 @@ PORT MAP (
 	i => ww_ALUSrc,
 	o => \ALUSrc~input_o\);
 
--- Location: IOIBUF_X115_Y57_N22
+-- Location: IOIBUF_X54_Y0_N8
 \MemWr~input\ : cycloneive_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
@@ -574,7 +735,7 @@ PORT MAP (
 	i => ww_MemWr,
 	o => \MemWr~input_o\);
 
--- Location: IOIBUF_X111_Y73_N1
+-- Location: IOIBUF_X83_Y73_N22
 \MemToReg~input\ : cycloneive_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
@@ -585,7 +746,7 @@ PORT MAP (
 	i => ww_MemToReg,
 	o => \MemToReg~input_o\);
 
--- Location: IOIBUF_X115_Y50_N8
+-- Location: IOIBUF_X79_Y0_N8
 \ALUOp[0]~input\ : cycloneive_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
@@ -596,7 +757,7 @@ PORT MAP (
 	i => ww_ALUOp(0),
 	o => \ALUOp[0]~input_o\);
 
--- Location: IOIBUF_X0_Y34_N22
+-- Location: IOIBUF_X102_Y73_N8
 \ALUOp[1]~input\ : cycloneive_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
@@ -607,7 +768,7 @@ PORT MAP (
 	i => ww_ALUOp(1),
 	o => \ALUOp[1]~input_o\);
 
--- Location: IOIBUF_X56_Y0_N22
+-- Location: IOIBUF_X11_Y0_N1
 \ALUOp[2]~input\ : cycloneive_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
@@ -618,7 +779,7 @@ PORT MAP (
 	i => ww_ALUOp(2),
 	o => \ALUOp[2]~input_o\);
 
--- Location: IOIBUF_X115_Y35_N22
+-- Location: IOIBUF_X85_Y0_N1
 \ALUOp[3]~input\ : cycloneive_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
@@ -629,11 +790,19 @@ PORT MAP (
 	i => ww_ALUOp(3),
 	o => \ALUOp[3]~input_o\);
 
-ww_LIXO(0) <= \LIXO[0]~output_o\;
+ww_Opcode(0) <= \Opcode[0]~output_o\;
 
-ww_LIXO(1) <= \LIXO[1]~output_o\;
+ww_Opcode(1) <= \Opcode[1]~output_o\;
 
-ww_LIXO(2) <= \LIXO[2]~output_o\;
+ww_Opcode(2) <= \Opcode[2]~output_o\;
+
+ww_func(0) <= \func[0]~output_o\;
+
+ww_func(1) <= \func[1]~output_o\;
+
+ww_func(2) <= \func[2]~output_o\;
+
+ww_func(3) <= \func[3]~output_o\;
 END structure;
 
 

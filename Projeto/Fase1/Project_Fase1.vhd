@@ -12,10 +12,12 @@ entity Project_Fase1 is
 		  MemWr    :  in  std_logic;
 		  MemToReg :  in  std_logic;
 		  ALUOp    :  in  std_logic_vector(3 downto 0);
-		  LIXO     :  out std_logic_vector(2 downto 0));
+		  Opcode   :  out std_logic_vector(2 downto 0); --Output criado para simular a entrada Opcode da ControlUnit
+		  func     :  out std_logic_vector(3 downto 0)); --Output criado para simular a entrada func da ControlUnit
 end Project_Fase1;
 
-architecture Structural of Project_Fase1 is 
+architecture Structural of Project_Fase1 is
+	--Fios criados para fazer a estrutura do Datapath igual à figura 1 do projeto
 	signal	A                  :  std_logic_vector(15 downto 0);
 	signal	SYNTHESIZED_WIRE_0 :  std_logic_vector(3  downto 0);
 	signal	SYNTHESIZED_WIRE_1 :  std_logic_vector(2  downto 0);
@@ -27,7 +29,12 @@ architecture Structural of Project_Fase1 is
 	signal	SYNTHESIZED_WIRE_9 :  std_logic_vector(7  downto 0);
 	signal	SYNTHESIZED_WIRE_10:  std_logic_vector(7  downto 0);
 begin
-
+	programcounter_12 : entity work.ProgramCounter_12(Behavioral)
+	generic map(N   => 4)
+	port map(clk 	 => CLK,
+				Reset  => Reset,
+				Enable => EnPC,
+				Cnt    => SYNTHESIZED_WIRE_0);
 	imemory : entity work.IMemory_16_16(Behavioral)
 		generic map(adressLength => 4,
 						N            => 16)
@@ -35,8 +42,14 @@ begin
 					Enable       	 => RI,
 					registAdress 	 => SYNTHESIZED_WIRE_0,
 					readData     	 => A);
-
-
+					
+	mux2_1_8b_1 : entity work.Mux2_1_8b(Behavioral)
+	generic map(bits => 8)
+	port map(sel     => ALUSrc,
+			   input0  => SYNTHESIZED_WIRE_3,
+				input1  => SYNTHESIZED_WIRE_4,
+				output  => SYNTHESIZED_WIRE_10);
+				
 	registers8 : entity work.Registers8(Behavioral)
 		generic map(adress => 3,
 						nData => 8)
@@ -50,29 +63,11 @@ begin
 					ReadData1 	=> SYNTHESIZED_WIRE_9,
 					ReadData2 	=> SYNTHESIZED_WIRE_3);
 
-
-	mux2_1_8b_1 : entity work.Mux2_1_8b(Behavioral)
-	generic map(bits => 8)
-	port map(sel     => ALUSrc,
-			   input0  => SYNTHESIZED_WIRE_3,
-				input1  => SYNTHESIZED_WIRE_4,
-				output  => SYNTHESIZED_WIRE_10);
-
-
 	signextend_7b_to_8b : entity work.SignExtend_7b_to_8b(Behavioral)
 	generic map(inbits  => 7,
 					outbits => 8)
 	port map(input      => A(6 downto 0),
 				output     => SYNTHESIZED_WIRE_4);
-
-
-	programcounter_12 : entity work.ProgramCounter_12(Behavioral)
-	generic map(N   => 4)
-	port map(clk 	 => CLK,
-				Reset  => Reset,
-				Enable => EnPC,
-				Cnt    => SYNTHESIZED_WIRE_0);
-
 
 	mux2_1_8b_2: entity work.Mux2_1_8b(Behavioral)
 	generic map(bits => 3)
@@ -106,5 +101,7 @@ begin
 				op1 	=> SYNTHESIZED_WIRE_10,
 				res 	=> SYNTHESIZED_WIRE_5);
 
-	LIXO(2 downto 0) <= A(15 downto 13);
+	Opcode(2 downto 0) <= A(15 downto 13);
+	
+	func(3 downto 0) <= A(3 downto 0);
 end Structural;

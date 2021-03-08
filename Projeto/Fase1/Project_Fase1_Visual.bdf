@@ -23,7 +23,7 @@ refer to the applicable agreement for further details.
 	(input)
 	(rect -360 -40 -192 -24)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "CLK" (rect 5 0 27 12)(font "Arial" ))
+	(text "CLK" (rect 5 0 26 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -39,7 +39,7 @@ refer to the applicable agreement for further details.
 	(input)
 	(rect -360 -8 -192 8)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "Reset" (rect 5 0 33 17)(font "Intel Clear" ))
+	(text "Reset" (rect 5 0 32 17)(font "Intel Clear" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -55,7 +55,7 @@ refer to the applicable agreement for further details.
 	(input)
 	(rect -352 184 -184 200)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "EnPC" (rect 5 0 34 12)(font "Arial" ))
+	(text "EnPC" (rect 5 0 33 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -71,7 +71,7 @@ refer to the applicable agreement for further details.
 	(input)
 	(rect 56 136 224 152)
 	(text "INPUT" (rect 15 6 43 16)(font "Arial" (font_size 6)))
-	(text "RI" (rect 153 -1 163 16)(font "Intel Clear" ))
+	(text "RI" (rect 153 -1 162 16)(font "Intel Clear" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 84 4)(pt 59 4))
@@ -105,7 +105,7 @@ refer to the applicable agreement for further details.
 	(input)
 	(rect 504 160 672 176)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "RegWr" (rect 5 0 39 17)(font "Intel Clear" ))
+	(text "RegWr" (rect 5 0 38 17)(font "Intel Clear" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -121,7 +121,7 @@ refer to the applicable agreement for further details.
 	(input)
 	(rect 1136 376 1304 392)
 	(text "INPUT" (rect 15 0 43 10)(font "Arial" (font_size 6)))
-	(text "ALUSrc" (rect 128 0 163 17)(font "Intel Clear" ))
+	(text "ALUSrc" (rect 128 0 162 17)(font "Intel Clear" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 84 12)(pt 59 12))
@@ -138,7 +138,7 @@ refer to the applicable agreement for further details.
 	(input)
 	(rect 1680 128 1848 144)
 	(text "INPUT" (rect 15 0 43 10)(font "Arial" (font_size 6)))
-	(text "MemWr" (rect 124 0 163 17)(font "Intel Clear" ))
+	(text "MemWr" (rect 124 0 162 17)(font "Intel Clear" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 84 12)(pt 59 12))
@@ -155,7 +155,7 @@ refer to the applicable agreement for further details.
 	(input)
 	(rect 1968 408 2136 424)
 	(text "INPUT" (rect 15 0 43 10)(font "Arial" (font_size 6)))
-	(text "MemToReg" (rect 107 0 163 17)(font "Intel Clear" ))
+	(text "MemToReg" (rect 107 0 162 17)(font "Intel Clear" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 84 12)(pt 59 12))
@@ -187,9 +187,25 @@ refer to the applicable agreement for further details.
 )
 (pin
 	(output)
-	(rect 384 520 560 536)
+	(rect 384 504 560 520)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "LIXO[2..0]" (rect 90 0 139 12)(font "Arial" ))
+	(text "Opcode[15..13]" (rect 90 0 165 12)(font "Arial" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 52 4)(pt 78 4))
+		(line (pt 52 12)(pt 78 12))
+		(line (pt 52 12)(pt 52 4))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 82 8)(pt 78 12))
+		(line (pt 78 12)(pt 82 8))
+	)
+)
+(pin
+	(output)
+	(rect 384 552 560 568)
+	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
+	(text "func[3..0]" (rect 90 0 138 12)(font "Arial" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 0 8)(pt 52 8))
@@ -995,8 +1011,8 @@ refer to the applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 376 528)
-	(pt 384 528)
+	(pt 376 512)
+	(pt 384 512)
 	(bus)
 )
 (connector
@@ -1005,9 +1021,20 @@ refer to the applicable agreement for further details.
 	(bus)
 )
 (connector
+	(pt 376 560)
+	(pt 384 560)
+	(bus)
+)
+(connector
 	(text "A[15..13]" (rect 360 482 377 524)(font "Intel Clear" )(vertical))
 	(pt 376 352)
-	(pt 376 528)
+	(pt 376 512)
+	(bus)
+)
+(connector
+	(text "A[3..0]" (rect 360 524 377 554)(font "Intel Clear" )(vertical))
+	(pt 376 512)
+	(pt 376 560)
 	(bus)
 )
 (junction (pt 1576 280))
@@ -1021,3 +1048,4 @@ refer to the applicable agreement for further details.
 (junction (pt 376 256))
 (junction (pt 376 272))
 (junction (pt 376 352))
+(junction (pt 376 512))

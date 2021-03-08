@@ -1,10 +1,10 @@
 |Project_Fase1
+CLK => programcounter_12:programcounter_12.clk
 CLK => imemory_16_16:imemory.clk
 CLK => registers8:registers8.clk
-CLK => programcounter_12:programcounter_12.clk
 CLK => dmemory_256_8:dmemory_256_8.clk
-Reset => registers8:registers8.Reset
 Reset => programcounter_12:programcounter_12.Reset
+Reset => registers8:registers8.Reset
 EnPC => programcounter_12:programcounter_12.Enable
 RI => imemory_16_16:imemory.Enable
 RegDst => mux2_1_8b:mux2_1_8b_2.sel
@@ -16,9 +16,32 @@ ALUOp[0] => alu8:alu8.ALUOp[0]
 ALUOp[1] => alu8:alu8.ALUOp[1]
 ALUOp[2] => alu8:alu8.ALUOp[2]
 ALUOp[3] => alu8:alu8.ALUOp[3]
-LIXO[0] <= imemory_16_16:imemory.readData[13]
-LIXO[1] <= imemory_16_16:imemory.readData[14]
-LIXO[2] <= imemory_16_16:imemory.readData[15]
+Opcode[0] <= imemory_16_16:imemory.readData[13]
+Opcode[1] <= imemory_16_16:imemory.readData[14]
+Opcode[2] <= imemory_16_16:imemory.readData[15]
+func[0] <= imemory_16_16:imemory.readData[0]
+func[1] <= imemory_16_16:imemory.readData[1]
+func[2] <= imemory_16_16:imemory.readData[2]
+func[3] <= imemory_16_16:imemory.readData[3]
+
+
+|Project_Fase1|ProgramCounter_12:programcounter_12
+clk => s_count[0].CLK
+clk => s_count[1].CLK
+clk => s_count[2].CLK
+clk => s_count[3].CLK
+Reset => s_count[0].ACLR
+Reset => s_count[1].ACLR
+Reset => s_count[2].ACLR
+Reset => s_count[3].ACLR
+Enable => s_count[0].ENA
+Enable => s_count[3].ENA
+Enable => s_count[2].ENA
+Enable => s_count[1].ENA
+Cnt[0] <= s_count[0].DB_MAX_OUTPUT_PORT_TYPE
+Cnt[1] <= s_count[1].DB_MAX_OUTPUT_PORT_TYPE
+Cnt[2] <= s_count[2].DB_MAX_OUTPUT_PORT_TYPE
+Cnt[3] <= s_count[3].DB_MAX_OUTPUT_PORT_TYPE
 
 
 |Project_Fase1|IMemory_16_16:imemory
@@ -118,6 +141,41 @@ readData[12] <= readData[12]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 readData[13] <= readData[13]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 readData[14] <= readData[14]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 readData[15] <= readData[15]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Project_Fase1|Mux2_1_8b:mux2_1_8b_1
+input0[0] => output.DATAB
+input0[1] => output.DATAB
+input0[2] => output.DATAB
+input0[3] => output.DATAB
+input0[4] => output.DATAB
+input0[5] => output.DATAB
+input0[6] => output.DATAB
+input0[7] => output.DATAB
+input1[0] => output.DATAA
+input1[1] => output.DATAA
+input1[2] => output.DATAA
+input1[3] => output.DATAA
+input1[4] => output.DATAA
+input1[5] => output.DATAA
+input1[6] => output.DATAA
+input1[7] => output.DATAA
+sel => output.OUTPUTSELECT
+sel => output.OUTPUTSELECT
+sel => output.OUTPUTSELECT
+sel => output.OUTPUTSELECT
+sel => output.OUTPUTSELECT
+sel => output.OUTPUTSELECT
+sel => output.OUTPUTSELECT
+sel => output.OUTPUTSELECT
+output[0] <= output.DB_MAX_OUTPUT_PORT_TYPE
+output[1] <= output.DB_MAX_OUTPUT_PORT_TYPE
+output[2] <= output.DB_MAX_OUTPUT_PORT_TYPE
+output[3] <= output.DB_MAX_OUTPUT_PORT_TYPE
+output[4] <= output.DB_MAX_OUTPUT_PORT_TYPE
+output[5] <= output.DB_MAX_OUTPUT_PORT_TYPE
+output[6] <= output.DB_MAX_OUTPUT_PORT_TYPE
+output[7] <= output.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |Project_Fase1|Registers8:registers8
@@ -446,41 +504,6 @@ ReadData2[6] <= Mux9.DB_MAX_OUTPUT_PORT_TYPE
 ReadData2[7] <= Mux8.DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Project_Fase1|Mux2_1_8b:mux2_1_8b_1
-input0[0] => output.DATAB
-input0[1] => output.DATAB
-input0[2] => output.DATAB
-input0[3] => output.DATAB
-input0[4] => output.DATAB
-input0[5] => output.DATAB
-input0[6] => output.DATAB
-input0[7] => output.DATAB
-input1[0] => output.DATAA
-input1[1] => output.DATAA
-input1[2] => output.DATAA
-input1[3] => output.DATAA
-input1[4] => output.DATAA
-input1[5] => output.DATAA
-input1[6] => output.DATAA
-input1[7] => output.DATAA
-sel => output.OUTPUTSELECT
-sel => output.OUTPUTSELECT
-sel => output.OUTPUTSELECT
-sel => output.OUTPUTSELECT
-sel => output.OUTPUTSELECT
-sel => output.OUTPUTSELECT
-sel => output.OUTPUTSELECT
-sel => output.OUTPUTSELECT
-output[0] <= output.DB_MAX_OUTPUT_PORT_TYPE
-output[1] <= output.DB_MAX_OUTPUT_PORT_TYPE
-output[2] <= output.DB_MAX_OUTPUT_PORT_TYPE
-output[3] <= output.DB_MAX_OUTPUT_PORT_TYPE
-output[4] <= output.DB_MAX_OUTPUT_PORT_TYPE
-output[5] <= output.DB_MAX_OUTPUT_PORT_TYPE
-output[6] <= output.DB_MAX_OUTPUT_PORT_TYPE
-output[7] <= output.DB_MAX_OUTPUT_PORT_TYPE
-
-
 |Project_Fase1|SignExtend_7b_to_8b:signextend_7b_to_8b
 input[0] => output[0].DATAIN
 input[1] => output[1].DATAIN
@@ -498,25 +521,6 @@ output[4] <= input[4].DB_MAX_OUTPUT_PORT_TYPE
 output[5] <= input[5].DB_MAX_OUTPUT_PORT_TYPE
 output[6] <= input[6].DB_MAX_OUTPUT_PORT_TYPE
 output[7] <= input[6].DB_MAX_OUTPUT_PORT_TYPE
-
-
-|Project_Fase1|ProgramCounter_12:programcounter_12
-clk => s_count[0].CLK
-clk => s_count[1].CLK
-clk => s_count[2].CLK
-clk => s_count[3].CLK
-Reset => s_count[0].ACLR
-Reset => s_count[1].ACLR
-Reset => s_count[2].ACLR
-Reset => s_count[3].ACLR
-Enable => s_count[0].ENA
-Enable => s_count[3].ENA
-Enable => s_count[2].ENA
-Enable => s_count[1].ENA
-Cnt[0] <= s_count[0].DB_MAX_OUTPUT_PORT_TYPE
-Cnt[1] <= s_count[1].DB_MAX_OUTPUT_PORT_TYPE
-Cnt[2] <= s_count[2].DB_MAX_OUTPUT_PORT_TYPE
-Cnt[3] <= s_count[3].DB_MAX_OUTPUT_PORT_TYPE
 
 
 |Project_Fase1|Mux2_1_8b:mux2_1_8b_2

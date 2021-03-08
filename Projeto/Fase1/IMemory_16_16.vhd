@@ -16,7 +16,7 @@ architecture Behavioral of IMemory_16_16 is
 	subtype TDataWord is std_logic_vector(N-1 downto 0);
 	type TROM is array (0 to NUM_WORDS-1) of TDataWord;
 	--Incializar a ROM com os valores das intrucoes dadas no Projeto para bytes
-	constant c_memory: TROM := ("0110000010000000", "1000000100000001", "0010010100110110", "0010000111000000",
+	constant c_memory: TROM := ("1110000010000000", "1000000100000001", "0010010100110110", "0010000111000000",
 										 "1000100100000001", "0010010100110110", "0011000111000000", "1000100100000001", 
 										 "0010010100110110", "0011000111000000", "1100000100000010", "1100001000000011", others => X"0000");
 begin
